@@ -25,3 +25,13 @@
     ```bash
     node src/index.js
     ```
+
+## TODO
+
+* database
+
+    Sequelize
+
+* queue control
+
+    stop and alarm if any queue is overhead

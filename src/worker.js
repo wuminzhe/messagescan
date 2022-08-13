@@ -1,8 +1,8 @@
-const { mkdir, writeFile, sleep } = require('./utils.js')
+const { sleep, mkdir, writeFile } = require('./utils.js')
 const Queue = require('bee-queue');
 
 const save = (filename, dirname, content) => {
-    const path = `../data/${dirname}`
+    const path = `./data/${dirname}`
     mkdir(path)
     writeFile(`${path}/${filename}.json`, content)
 }
@@ -58,7 +58,8 @@ exports.start = async (handlerName, handler) => {
         try {
             const result = await handle(handlerName, handler, job.data)
 
-            // console.debug(result)
+            console.debug(`${handlerName}: params: ${JSON.stringify(job.data)}, result: ${JSON.stringify(result)}`)
+
             if (result.messageKey && result.messageData) {
 
                 save(handlerName, result.messageKey, result.messageData)

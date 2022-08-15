@@ -19,10 +19,6 @@ const next = async (currentHandlerName, nextHandler) => {
             await sleep(2000)
         }
 
-        if (!nextHandler.params) {
-            nextHandler.params = {}
-        }
-
         addJob(nextHandler.name, nextHandler.params)
     }
 }
@@ -62,7 +58,7 @@ exports.start = async (handlerName, handler) => {
 
             if (result.messageKey && result.messageData) {
 
-                save(handlerName, result.messageKey, result.messageData)
+                save(handlerName, result.messageKey, JSON.stringify(result.messageData))
 
                 if (result.nextHandler) {
                     await next(handlerName, result.nextHandler)

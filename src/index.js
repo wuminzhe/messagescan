@@ -38,10 +38,10 @@ const main = async () => {
     let cursor = undefined;
     while(true) {
         const query = buildQueryStr(2, cursor)
-        const result = await fetch(query)
-        const nodes = result.data.query.s2sEvents.nodes;
+        const result = await fetch(query, "s2sEvents")
+        const nodes = result.nodes;
         if(nodes.length > 0) {
-            const edges = result.data.query.s2sEvents.edges;
+            const edges = result.edges;
             cursor = edges[edges.length-1].cursor
             for(let i = 0; i < nodes.length; i++) {
                 console.log(nodes[i].id)

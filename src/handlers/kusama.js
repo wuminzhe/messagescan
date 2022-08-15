@@ -18,9 +18,9 @@ const buildQueryStr = messageId => {
 exports.handle = async (params) => {
     const queryStr = buildQueryStr(params.messageId)
 
-    const message = await fetch(queryStr)
+    const message = await fetch(queryStr, "s2sEvent")
 
     return {
-        messageData: JSON.stringify(message.data.query.s2sEvent)
+        messageData: message
     }
 }

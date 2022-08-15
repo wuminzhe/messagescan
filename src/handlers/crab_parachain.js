@@ -18,12 +18,13 @@ const buildQueryStr = messageId => {
 exports.handle = async (params) => {
     const queryStr = buildQueryStr(params.messageId)
 
-    const message = await fetch(queryStr)
-    const blockNumber = message.data.query.s2sEvent.block.number
+    const message = await fetch(queryStr, "s2sEvent")
+    console.log(message)
+    const blockNumber = message.block.number
 
     return {
         messageKey: `${blockNumber}-${params.messageId}`, // dirname
-        messageData: JSON.stringify(message.data.query.s2sEvent), // file content
+        messageData: message, // file content
         nextHandler: {
             name: "kusama",
             params: {

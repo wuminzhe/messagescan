@@ -1,10 +1,10 @@
 const axios = require('axios');
 const { curry } = require('ramda');
 
-const fetch = async (url, queryStr) => {
+const fetch = async (url, queryStr, prop) => {
     try {
         const resp = await axios.post(url, { "query": queryStr })
-        return resp.data
+        return resp.data.data.query[prop]
     } catch (err) {
         // Handle Error Here
         console.error(err);
